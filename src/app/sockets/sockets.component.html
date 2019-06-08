@@ -1,0 +1,37 @@
+<div>
+  <div class="header">
+    <span (click)="changeIndex(1)"> Transactions </span>
+    <span (click)="changeIndex(2)"> Search </span>
+  </div> 
+
+  <ng-container *ngIf="tabIndex==1">
+      <div>
+        <div>
+          Current state: {{statusMessage}}
+        </div>
+        <div>
+            <canvas #lineChart>{{ chart }}</canvas>
+        </div>
+      </div>
+  </ng-container>
+
+  <ng-container *ngIf="tabIndex==2">
+      <div>
+        Search
+      </div>
+      <div>
+        <input type="number" [(ngModel)]="search" (input)="handleSearchChange($event.target.value)">
+      </div>
+
+      <div *ngIf="search; else empty" >
+        BTC Values: 
+            <ol>
+              <li *ngFor="let value of results">{{value}}</li>
+            </ol>
+      </div>
+      <ng-template #empty>
+        <div>Search to see BTC value</div>
+      </ng-template>
+  </ng-container>
+  
+</div>
